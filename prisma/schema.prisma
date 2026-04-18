@@ -1,0 +1,84 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id            String   @id @default(cuid())
+  clerkId       String   @unique
+  name          String
+  email         String   @unique
+  imageUrl      String?
+  skills        String[]
+  interests     String[]
+  location      String?
+  trustScore    Int      @default(0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  requests      Request[]
+  offers        HelpOffer[]
+  sentMessages     Message[] @relation("SentMessages")
+  receivedMessages Message[] @relation("ReceivedMessages")
+  notifications    Notification[]
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  content   String
+  type      String   // offer, message, acceptance, system
+  link      String?
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+  
+  userId    String
+  user      User     @relation(fields: [userId], references: [clerkId], onDelete: Cascade)
+}
+
+model Message {
+  id        String   @id @default(cuid())
+  content   String
+  createdAt DateTime @default(now())
+  
+  senderId  String
+  sender    User     @relation("SentMessages", fields: [senderId], references: [clerkId], onDelete: Cascade)
+  
+  receiverId String
+  receiver   User    @relation("ReceivedMessages", fields: [receiverId], references: [clerkId], onDelete: Cascade)
+}
+
+model Request {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  category    String
+  tags        String[]
+  urgency     String   // Low, Medium, High, Critical
+  status      String   @default("open") // open, in-progress, solved, closed
+  
+  userId      String
+  user        User     @relation(fields: [userId], references: [clerkId], onDelete: Cascade)
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  offers      HelpOffer[]
+}
+
+model HelpOffer {
+  id        String   @id @default(cuid())
+  message   String
+  status    String   @default("pending") // pending, accepted, rejected
+  
+  requestId String
+  request   Request  @relation(fields: [requestId], references: [id], onDelete: Cascade)
+  
+  userId    String
+  user      User     @relation(fields: [userId], references: [clerkId], onDelete: Cascade)
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
