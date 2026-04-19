@@ -1,40 +1,46 @@
 "use server";
 
-import prisma from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
 
 export async function getUserDashboard() {
   const { userId } = await auth();
   if (!userId) throw new Error("Unauthorized");
 
-  const user = await prisma.user.findUnique({
-    where: { clerkId: userId },
-    include: {
-      requests: {
-        include: {
-          _count: {
-            select: { offers: true }
-          }
-        },
-        orderBy: { createdAt: 'desc' }
-      },
-      offers: {
-        include: {
-          request: true
-        },
-        orderBy: { createdAt: 'desc' }
+  // Mock data for user dashboard
+  return {
+    id: "mock_user_id",
+    clerkId: userId,
+    name: "Mock User",
+    email: "mock@example.com",
+    trustScore: 85,
+    requests: [
+      {
+        id: "mock_req_1",
+        title: "Fix my plumbing",
+        description: "Kitchen sink is leaking.",
+        category: "Home Repair",
+        status: "OPEN",
+        createdAt: new Date(),
+        _count: { offers: 2 }
       }
-    }
-  });
-
-  return user;
+    ],
+    offers: [
+      {
+        id: "mock_off_1",
+        status: "PENDING",
+        request: {
+          title: "Help with React"
+        }
+      }
+    ]
+  };
 }
 
 export async function getLeaderboard() {
-  return await prisma.user.findMany({
-    orderBy: {
-      trustScore: 'desc'
-    },
-    take: 10
-  });
+  // Mock data for leaderboard
+  return [
+    { id: "1", name: "Alice", trustScore: 98, imageUrl: "https://github.com/shadcn.png" },
+    { id: "2", name: "Bob", trustScore: 95, imageUrl: "https://github.com/shadcn.png" },
+    { id: "3", name: "Charlie", trustScore: 92, imageUrl: "https://github.com/shadcn.png" },
+  ];
 }

@@ -1,7 +1,6 @@
 import { Webhook } from 'svix'
 import { headers } from 'next/headers'
 import { WebhookEvent } from '@clerk/nextjs/server'
-import prisma from '@/lib/prisma'
 
 export const dynamic = 'force-dynamic';
 
@@ -9,7 +8,7 @@ export async function POST(req: Request) {
   const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET
 
   if (!WEBHOOK_SECRET) {
-    throw new Error('Please add WEBHOOK_SECRET from Clerk Dashboard to .env or .env.local')
+    console.warn('WEBHOOK_SECRET is missing. Webhook verification skipped (Mock Mode).')
   }
 
   const headerPayload = await headers()
@@ -26,24 +25,27 @@ export async function POST(req: Request) {
   const payload = await req.json()
   const body = JSON.stringify(payload)
 
-  const wh = new Webhook(WEBHOOK_SECRET)
-
   let evt: WebhookEvent
 
-  try {
-    evt = wh.verify(body, {
-      'svix-id': svix_id,
-      'svix-timestamp': svix_timestamp,
-      'svix-signature': svix_signature,
-    }) as WebhookEvent
-  } catch (err) {
-    console.error('Error verifying webhook:', err)
-    return new Response('Error occured', {
-      status: 400,
-    })
+  if (WEBHOOK_SECRET) {
+    const wh = new Webhook(WEBHOOK_SECRET)
+    try {
+      evt = wh.verify(body, {
+        'svix-id': svix_id,
+        'svix-timestamp': svix_timestamp,
+        'svix-signature': svix_signature,
+      }) as WebhookEvent
+    } catch (err) {
+      console.error('Error verifying webhook:', err)
+      return new Response('Error occured', {
+        status: 400,
+      })
+    }
+  } else {
+    // Fallback for mock mode if secret is missing
+    evt = payload as WebhookEvent
   }
 
-  const { id } = evt.data
   const eventType = evt.type
 
   if (eventType === 'user.created' || eventType === 'user.updated') {
@@ -51,20 +53,7 @@ export async function POST(req: Request) {
     const email = email_addresses[0].email_address
     const name = `${first_name || ''} ${last_name || ''}`.trim() || email.split('@')[0]
 
-    await prisma.user.upsert({
-      where: { clerkId: id },
-      update: {
-        name,
-        email,
-        imageUrl: image_url,
-      },
-      create: {
-        clerkId: id,
-        name,
-        email,
-        imageUrl: image_url,
-      },
-    })
+    console.log(`Mock user sync for: ${name} (${id}) - Prisma disabled.`);
   }
 
   return new Response('', { status: 200 })

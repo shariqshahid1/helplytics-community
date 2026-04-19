@@ -1,39 +1,29 @@
 "use server";
 
-import prisma from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
-import { revalidatePath } from "next/cache";
 
 export async function getNotifications() {
   const { userId } = await auth();
   if (!userId) throw new Error("Unauthorized");
 
-  return await prisma.notification.findMany({
-    where: { userId },
-    orderBy: { createdAt: 'desc' },
-    take: 20
-  });
+  return [
+    {
+      id: "mock_notif_1",
+      type: "OFFER",
+      content: "Someone offered to help with your request!",
+      isRead: false,
+      link: "/dashboard",
+      createdAt: new Date(),
+    }
+  ];
 }
 
 export async function markAsRead(notificationId: string) {
-  const { userId } = await auth();
-  if (!userId) throw new Error("Unauthorized");
-
-  await prisma.notification.update({
-    where: { id: notificationId, userId },
-    data: { isRead: true }
-  });
-
-  revalidatePath("/notifications");
+  console.log("Mock marking notification as read:", notificationId);
+  return { success: true };
 }
 
-export async function createNotification(data: {
-  userId: string;
-  content: string;
-  type: string;
-  link?: string;
-}) {
-  return await prisma.notification.create({
-    data
-  });
+export async function createNotification(userId: string, type: string, content: string, link?: string) {
+  console.log("Mock creating notification for user:", userId);
+  return { success: true };
 }

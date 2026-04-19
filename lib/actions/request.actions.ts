@@ -1,13 +1,8 @@
 "use server";
 
-import prisma from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 import { OpenAI } from "openai";
-
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
 
 export async function createRequest(formData: {
   title: string;
@@ -19,12 +14,16 @@ export async function createRequest(formData: {
   const { userId } = await auth();
   if (!userId) throw new Error("Unauthorized");
 
-  const request = await prisma.request.create({
-    data: {
-      ...formData,
-      userId,
-    },
-  });
+  console.log("Mock creating request:", formData);
+  
+  // Return mock created request
+  const request = {
+    id: "mock_req_" + Date.now(),
+    ...formData,
+    userId,
+    status: "OPEN",
+    createdAt: new Date(),
+  };
 
   revalidatePath("/explore");
   revalidatePath("/dashboard");
@@ -39,6 +38,10 @@ export async function getAIAnalysis(title: string, description: string) {
       urgency: "Medium",
     };
   }
+
+  const openai = new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY,
+  });
 
   try {
     const response = await openai.chat.completions.create({
@@ -74,35 +77,77 @@ export async function getRequests(filters?: {
   urgency?: string;
   status?: string;
 }) {
-  return await prisma.request.findMany({
-    where: {
-      ...filters,
-    },
-    include: {
-      user: true,
+  // Return mock requests
+  return [
+    {
+      id: "mock_req_1",
+      title: "Need help with Next.js",
+      description: "Trying to understand Server Actions.",
+      category: "Programming",
+      urgency: "High",
+      tags: ["nextjs", "react", "programming"],
+      status: "OPEN",
+      createdAt: new Date(),
+      user: {
+        name: "Alice",
+        imageUrl: "https://github.com/shadcn.png",
+        trustScore: 95
+      },
       _count: {
-        select: { offers: true },
+        offers: 2,
       },
     },
-    orderBy: {
-      createdAt: "desc",
-    },
-  });
+    {
+      id: "mock_req_2",
+      title: "Grocery Shopping",
+      description: "Need someone to pick up groceries.",
+      category: "Errands",
+      urgency: "Medium",
+      tags: ["nextjs", "react", "programming"],
+      status: "OPEN",
+      createdAt: new Date(),
+      user: {
+        name: "Bob",
+        imageUrl: "https://github.com/shadcn.png",
+        trustScore: 88
+      },
+      _count: {
+        offers: 0,
+      },
+    }
+  ];
 }
 
 export async function getRequestById(id: string) {
-  return await prisma.request.findUnique({
-    where: { id },
-    include: {
-      user: true,
-      offers: {
-        include: {
-          user: true,
-        },
-        orderBy: {
-          createdAt: "desc",
-        },
-      },
+  // Return mock request details
+  return {
+    id: id,
+    title: "Mock Request Title",
+    description: "This is a mock description for request " + id,
+    category: "General",
+    urgency: "Medium",
+    tags: ["general", "help"],
+    status: "OPEN",
+    createdAt: new Date(),
+    userId: "mock_owner_id",
+    user: {
+      name: "Mock User",
+      imageUrl: "https://github.com/shadcn.png",
+      trustScore: 90
     },
-  });
+    offers: [
+      {
+        id: "mock_off_1",
+        message: "I can help with this!",
+        status: "PENDING",
+        createdAt: new Date(),
+        userId: "mock_helper_id",
+        user: {
+          name: "Helper person",
+          imageUrl: "https://github.com/shadcn.png",
+          trustScore: 92
+        }
+      }
+    ]
+  };
 }

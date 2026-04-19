@@ -119,7 +119,7 @@ export default async function DashboardPage() {
               </div>
             ) : (
               <div className="grid grid-cols-1 gap-6">
-                {user.requests.map((request) => (
+                {user.requests.map((request: any) => (
                   <Card key={request.id} className="border-none shadow-sm hover:shadow-xl hover:shadow-indigo-50 transition-all duration-500 rounded-[28px] bg-white group overflow-hidden">
                     <CardContent className="p-8">
                       <div className="flex flex-col md:flex-row justify-between md:items-center gap-8">
@@ -171,7 +171,7 @@ export default async function DashboardPage() {
               </div>
             ) : (
               <div className="grid grid-cols-1 gap-6">
-                {user.offers.map((offer) => (
+                {user.offers.map((offer: any) => (
                   <Card key={offer.id} className="border-none shadow-sm hover:shadow-xl hover:shadow-indigo-50 transition-all duration-500 rounded-[28px] bg-white overflow-hidden">
                     <CardContent className="p-8">
                       <div className="flex flex-col md:flex-row justify-between md:items-center gap-8">
