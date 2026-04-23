@@ -120,27 +120,27 @@ export default function AIAnalysis() {
             {history.slice().reverse().map((msg, i) => (
               <div 
                 key={i} 
-                className={`flex gap-4 p-6 rounded-[28px] ${
-                  msg.role === 'user' ? 'bg-white border border-zinc-100 ml-12' : 'bg-indigo-50/50 border border-indigo-100 mr-12'
+                className={`flex gap-3 md:gap-4 p-5 md:p-6 rounded-[24px] md:rounded-[28px] ${
+                  msg.role === 'user' ? 'bg-white border border-zinc-100 ml-6 md:ml-12' : 'bg-indigo-50/50 border border-indigo-100 mr-6 md:mr-12'
                 }`}
               >
-                <div className={`p-2 h-fit rounded-xl ${
+                <div className={`p-2 h-fit rounded-xl shrink-0 ${
                   msg.role === 'user' ? 'bg-zinc-100 text-zinc-600' : 'bg-indigo-600 text-white'
                 }`}>
                   {msg.role === 'user' ? <User className="h-4 w-4" /> : <Bot className="h-4 w-4" />}
                 </div>
-                <div className="flex-1">
-                  <p className={`font-medium leading-relaxed ${msg.role === 'user' ? 'text-zinc-900' : 'text-indigo-900'}`}>
+                <div className="flex-1 min-w-0">
+                  <p className={`font-medium leading-relaxed text-sm md:text-base break-words ${msg.role === 'user' ? 'text-zinc-900' : 'text-indigo-900'}`}>
                     {msg.content}
                   </p>
-                  <p className="mt-2 text-[10px] font-bold text-zinc-400 uppercase tracking-widest">
+                  <p className="mt-2 text-[9px] md:text-[10px] font-bold text-zinc-400 uppercase tracking-widest">
                     {new Date(msg.timestamp).toLocaleTimeString()}
                   </p>
                 </div>
               </div>
             ))}
             {isLoading && (
-              <div className="flex gap-4 p-6 rounded-[28px] bg-indigo-50/50 border border-indigo-100 mr-12 animate-pulse">
+              <div className="flex gap-4 p-6 rounded-[28px] bg-indigo-50/50 border border-indigo-100 mr-6 md:mr-12 animate-pulse">
                 <div className="p-2 h-fit rounded-xl bg-indigo-600 text-white">
                   <Bot className="h-4 w-4" />
                 </div>

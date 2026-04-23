@@ -14,25 +14,25 @@ export default function AICenterPage() {
   return (
     <div className="min-h-screen bg-[#fafafa]">
       <Navbar />
-      <main className="max-w-7xl mx-auto px-4 py-16">
+      <main className="max-w-7xl mx-auto px-4 py-8 md:py-16">
         <div className="mb-12">
           <div className="flex items-center gap-4 mb-4">
             <div className="p-3 bg-zinc-900 rounded-2xl shadow-lg shadow-zinc-200">
-              <Sparkles className="h-8 w-8 text-white" />
+              <Sparkles className="h-6 w-6 md:h-8 md:w-8 text-white" />
             </div>
-            <h1 className="text-5xl font-black tracking-tight text-zinc-900">AI Analysis</h1>
+            <h1 className="text-3xl md:text-5xl font-black tracking-tight text-zinc-900">AI Analysis</h1>
           </div>
-          <p className="text-zinc-500 text-lg font-medium">Unlock deep platform insights and predictive analytics with our advanced AI engine.</p>
+          <p className="text-zinc-500 text-base md:text-lg font-medium">Unlock deep platform insights and predictive analytics with our advanced AI engine.</p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-12">
           <div className="lg:col-span-2">
             <AIAnalysis />
           </div>
 
-          <div className="space-y-8">
-            <h2 className="text-2xl font-black text-zinc-900">Live Metrics</h2>
-            <div className="grid grid-cols-1 gap-4">
+          <div className="space-y-6 md:space-y-8">
+            <h2 className="text-xl md:text-2xl font-black text-zinc-900">Live Metrics</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
               {stats.map((stat) => (
                 <Card key={stat.title} className="border-none shadow-sm bg-white rounded-2xl overflow-hidden group hover:shadow-md transition-all">
                   <CardContent className="p-6 flex items-center justify-between">

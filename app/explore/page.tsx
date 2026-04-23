@@ -25,21 +25,21 @@ export default async function ExplorePage() {
   return (
     <div className="min-h-screen bg-[#fafafa]">
       <Navbar />
-      <main className="max-w-7xl mx-auto px-4 py-16">
-        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8 mb-16">
+      <main className="max-w-7xl mx-auto px-4 py-8 md:py-16">
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8 mb-12 md:mb-16">
           <div className="max-w-2xl">
             <div className="flex items-center gap-2 mb-4">
               <div className="h-2 w-8 bg-indigo-600 rounded-full" />
               <span className="text-sm font-bold uppercase tracking-widest text-zinc-400">Live Feed</span>
             </div>
-            <h1 className="text-5xl font-black tracking-tight text-zinc-900 mb-6">Explore Requests</h1>
+            <h1 className="text-4xl md:text-5xl font-black tracking-tight text-zinc-900 mb-6">Explore Requests</h1>
             <p className="text-zinc-500 text-lg font-medium leading-relaxed">
               Join the front lines of problem-solving. Find requests that match your expertise and start building your trust score.
             </p>
           </div>
-          <div className="flex flex-wrap gap-3">
-            <Link href="/request/create">
-              <Button className="bg-zinc-900 text-white hover:bg-zinc-800 rounded-2xl px-8 h-12 font-bold shadow-lg shadow-zinc-200">
+          <div className="flex flex-wrap gap-3 w-full sm:w-auto">
+            <Link href="/request/create" className="w-full sm:w-auto">
+              <Button className="w-full sm:w-auto bg-zinc-900 text-white hover:bg-zinc-800 rounded-2xl px-8 h-12 font-bold shadow-lg shadow-zinc-200">
                 Create Request
               </Button>
             </Link>
@@ -47,12 +47,12 @@ export default async function ExplorePage() {
         </div>
 
         {/* Filters and Search */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-12">
-          <div className="md:col-span-2 relative">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+          <div className="sm:col-span-2 relative">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-zinc-400" />
             <Input 
-              placeholder="Search by keywords, skills, or tags..." 
-              className="pl-12 h-14 bg-white border-zinc-100 rounded-2xl shadow-sm focus:ring-indigo-600"
+              placeholder="Search by keywords..." 
+              className="pl-12 h-14 bg-white border-zinc-100 rounded-2xl shadow-sm focus:ring-indigo-600 font-medium"
             />
           </div>
           <Button variant="outline" className="h-14 rounded-2xl bg-white border-zinc-100 font-bold gap-2">
@@ -63,10 +63,10 @@ export default async function ExplorePage() {
           </Button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {requests.map((request) => (
             <Card key={request.id} className="group flex flex-col border-none shadow-sm hover:shadow-2xl hover:shadow-indigo-100 transition-all duration-500 rounded-[32px] overflow-hidden bg-white">
-              <CardHeader className="p-8 pb-4">
+              <CardHeader className="p-6 md:p-8 pb-4">
                 <div className="flex justify-between items-center mb-6">
                   <Badge variant="outline" className={`px-3 py-1 rounded-full font-bold text-[10px] uppercase tracking-wider border-none ${getUrgencyColor(request.urgency)}`}>
                     {request.urgency}
@@ -76,12 +76,12 @@ export default async function ExplorePage() {
                     {formatDistanceToNow(new Date(request.createdAt))}
                   </div>
                 </div>
-                <CardTitle className="text-2xl font-black text-zinc-900 leading-tight group-hover:text-indigo-600 transition-colors line-clamp-2">
+                <CardTitle className="text-xl md:text-2xl font-black text-zinc-900 leading-tight group-hover:text-indigo-600 transition-colors line-clamp-2">
                   {request.title}
                 </CardTitle>
               </CardHeader>
-              <CardContent className="p-8 pt-0 flex-1">
-                <p className="text-zinc-500 line-clamp-3 text-base leading-relaxed mb-8 font-medium">
+              <CardContent className="p-6 md:p-8 pt-0 flex-1">
+                <p className="text-zinc-500 line-clamp-3 text-sm md:text-base leading-relaxed mb-8 font-medium">
                   {request.description}
                 </p>
                 <div className="flex flex-wrap gap-2">
@@ -95,7 +95,7 @@ export default async function ExplorePage() {
                   )}
                 </div>
               </CardContent>
-              <CardFooter className="p-8 pt-6 border-t border-zinc-50 flex items-center justify-between bg-zinc-50/30">
+              <CardFooter className="p-6 md:p-8 pt-6 border-t border-zinc-50 flex flex-wrap items-center justify-between bg-zinc-50/30 gap-4">
                 <div className="flex items-center gap-3">
                   <div className="h-10 w-10 rounded-full bg-zinc-200 overflow-hidden ring-2 ring-white shadow-sm">
                     {request.user.imageUrl ? (
@@ -111,7 +111,7 @@ export default async function ExplorePage() {
                     <span className="text-[10px] text-zinc-400 font-bold uppercase tracking-widest mt-1">Lvl 4 Expert</span>
                   </div>
                 </div>
-                <Link href={`/request/${request.id}`}>
+                <Link href={`/request/${request.id}`} className="ml-auto">
                   <Button size="sm" variant="ghost" className="h-10 w-10 rounded-full p-0 hover:bg-indigo-600 hover:text-white transition-all shadow-indigo-100">
                     <ArrowRight className="h-5 w-5" />
                   </Button>

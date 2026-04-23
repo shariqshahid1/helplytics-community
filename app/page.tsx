@@ -10,7 +10,7 @@ export default function Home() {
       
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="relative pt-24 pb-32 overflow-hidden">
+        <section className="relative pt-12 md:pt-24 pb-20 md:pb-32 overflow-hidden">
           {/* Animated Background Mesh */}
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10 opacity-30">
             <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-indigo-200 rounded-full blur-[120px] animate-pulse" />
@@ -19,29 +19,29 @@ export default function Home() {
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="text-center max-w-4xl mx-auto">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-zinc-200 shadow-sm text-zinc-900 text-xs font-bold mb-8 transition-transform hover:scale-105 cursor-default">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-zinc-200 shadow-sm text-zinc-900 text-[10px] sm:text-xs font-bold mb-8 transition-transform hover:scale-105 cursor-default">
                 <span className="flex h-2 w-2 rounded-full bg-indigo-600 animate-ping" />
                 <Sparkles className="h-3.5 w-3.5 text-indigo-600" />
                 <span>Now powered by Helplytics AI v2.0</span>
               </div>
               
-              <h1 className="text-6xl md:text-8xl font-black tracking-tight text-zinc-900 mb-8 leading-[0.9]">
+              <h1 className="text-4xl sm:text-6xl md:text-8xl font-black tracking-tight text-zinc-900 mb-8 leading-[1.1] md:leading-[0.9]">
                 Expert help at the speed of <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-violet-600">thought.</span>
               </h1>
               
-              <p className="max-w-2xl mx-auto text-xl text-zinc-600 mb-12 leading-relaxed font-medium">
+              <p className="max-w-2xl mx-auto text-lg md:text-xl text-zinc-600 mb-12 leading-relaxed font-medium px-4">
                 The world&apos;s first AI-orchestrated help platform. Connect with top contributors, 
                 build your trust score, and solve challenges in minutes, not days.
               </p>
               
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-                <Link href="/sign-up">
-                  <Button size="lg" className="h-14 px-10 bg-zinc-900 text-white hover:bg-zinc-800 rounded-2xl text-lg font-bold shadow-xl shadow-zinc-200 transition-all hover:-translate-y-1">
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6 px-4">
+                <Link href="/sign-up" className="w-full sm:w-auto">
+                  <Button size="lg" className="w-full sm:w-auto h-14 px-10 bg-zinc-900 text-white hover:bg-zinc-800 rounded-2xl text-lg font-bold shadow-xl shadow-zinc-200 transition-all hover:-translate-y-1">
                     Get Started Free
                   </Button>
                 </Link>
-                <Link href="/explore">
-                  <Button size="lg" variant="outline" className="h-14 px-10 rounded-2xl text-lg font-bold border-2 bg-white transition-all hover:bg-zinc-50">
+                <Link href="/explore" className="w-full sm:w-auto">
+                  <Button size="lg" variant="outline" className="w-full sm:w-auto h-14 px-10 rounded-2xl text-lg font-bold border-2 bg-white transition-all hover:bg-zinc-50">
                     Live Feed <ArrowRight className="ml-2 h-5 w-5 text-indigo-600" />
                   </Button>
                 </Link>
@@ -59,14 +59,14 @@ export default function Home() {
         </section>
 
         {/* Feature Grid */}
-        <section className="py-32 bg-white">
+        <section className="py-20 md:py-32 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="mb-20 text-center">
-              <h2 className="text-4xl font-black text-zinc-900 mb-4">Engineered for excellence.</h2>
-              <p className="text-zinc-500 text-lg max-w-xl mx-auto font-medium">A suite of powerful tools designed to help you contribute and collaborate effectively.</p>
+            <div className="mb-16 md:mb-20 text-center">
+              <h2 className="text-3xl md:text-4xl font-black text-zinc-900 mb-4 px-4">Engineered for excellence.</h2>
+              <p className="text-zinc-500 text-base md:text-lg max-w-xl mx-auto font-medium px-4">A suite of powerful tools designed to help you contribute and collaborate effectively.</p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10">
               {[
                 {
                   icon: Sparkles,
@@ -87,12 +87,12 @@ export default function Home() {
                   color: "bg-zinc-900"
                 }
               ].map((feat, i) => (
-                <div key={i} className="group p-10 rounded-[40px] border border-zinc-100 bg-[#fafafa] transition-all hover:shadow-2xl hover:shadow-indigo-100 hover:-translate-y-2">
+                <div key={i} className="group p-8 md:p-10 rounded-[32px] md:rounded-[40px] border border-zinc-100 bg-[#fafafa] transition-all hover:shadow-2xl hover:shadow-indigo-100 md:hover:-translate-y-2">
                   <div className={`${feat.color} p-4 rounded-2xl w-fit shadow-lg mb-8 group-hover:scale-110 transition-transform`}>
-                    <feat.icon className="h-8 w-8 text-white" />
+                    <feat.icon className="h-6 w-6 md:h-8 md:w-8 text-white" />
                   </div>
-                  <h3 className="text-2xl font-bold text-zinc-900 mb-4">{feat.title}</h3>
-                  <p className="text-zinc-500 leading-relaxed text-lg">{feat.desc}</p>
+                  <h3 className="text-xl md:text-2xl font-bold text-zinc-900 mb-4">{feat.title}</h3>
+                  <p className="text-zinc-500 leading-relaxed text-base md:text-lg">{feat.desc}</p>
                 </div>
               ))}
             </div>
@@ -100,19 +100,19 @@ export default function Home() {
         </section>
 
         {/* Dynamic CTA Section */}
-        <section className="py-24 px-4">
-          <div className="max-w-6xl mx-auto rounded-[50px] bg-zinc-900 overflow-hidden relative shadow-2xl">
-            <div className="absolute top-0 right-0 w-[60%] h-full bg-gradient-to-l from-indigo-500/20 to-transparent pointer-events-none" />
-            <div className="p-16 md:p-24 relative z-10">
-              <h2 className="text-4xl md:text-6xl font-black text-white mb-8 leading-tight">
-                Ready to join the<br />future of help?
+        <section className="py-16 md:py-24 px-4">
+          <div className="max-w-6xl mx-auto rounded-[32px] md:rounded-[50px] bg-zinc-900 overflow-hidden relative shadow-2xl">
+            <div className="absolute top-0 right-0 w-full md:w-[60%] h-full bg-gradient-to-l from-indigo-500/20 to-transparent pointer-events-none" />
+            <div className="p-10 md:p-24 relative z-10 text-center md:text-left">
+              <h2 className="text-3xl md:text-6xl font-black text-white mb-8 leading-tight">
+                Ready to join the<br className="hidden md:block" />future of help?
               </h2>
-              <p className="text-zinc-400 text-xl max-w-xl mb-12 font-medium">
+              <p className="text-zinc-400 text-lg md:text-xl max-w-xl mb-12 font-medium mx-auto md:ml-0">
                 Join over 10,000+ experts and seekers building the next generation of collaborative intelligence.
               </p>
-              <div className="flex flex-wrap gap-6">
-                <Link href="/sign-up">
-                  <Button size="lg" className="h-16 px-12 bg-white text-zinc-900 hover:bg-zinc-100 rounded-2xl text-xl font-black transition-all hover:scale-105">
+              <div className="flex flex-wrap justify-center md:justify-start gap-6">
+                <Link href="/sign-up" className="w-full md:w-auto">
+                  <Button size="lg" className="w-full md:w-auto h-16 px-12 bg-white text-zinc-900 hover:bg-zinc-100 rounded-2xl text-xl font-black transition-all hover:scale-105">
                     Join the Community
                   </Button>
                 </Link>

@@ -13,13 +13,13 @@ export default function ReportsPage() {
   return (
     <div className="min-h-screen bg-[#fafafa]">
       <Navbar />
-      <main className="max-w-7xl mx-auto px-4 py-16">
-        <div className="flex justify-between items-end mb-12">
+      <main className="max-w-7xl mx-auto px-4 py-8 md:py-16">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 mb-12">
           <div>
-            <h1 className="text-5xl font-black tracking-tight text-zinc-900 mb-4">Reports</h1>
-            <p className="text-zinc-500 text-lg font-medium">Deep dive into your platform activity and performance metrics.</p>
+            <h1 className="text-4xl md:text-5xl font-black tracking-tight text-zinc-900 mb-4">Reports</h1>
+            <p className="text-zinc-500 text-base md:text-lg font-medium">Deep dive into your platform activity and performance metrics.</p>
           </div>
-          <Button className="bg-zinc-900 text-white hover:bg-zinc-800 rounded-2xl h-12 px-6 font-bold shadow-lg shadow-zinc-200">
+          <Button className="w-full md:w-auto bg-zinc-900 text-white hover:bg-zinc-800 rounded-2xl h-12 px-6 font-bold shadow-lg shadow-zinc-200">
             <Download className="mr-2 h-4 w-4" /> Export All
           </Button>
         </div>
@@ -59,24 +59,24 @@ export default function ReportsPage() {
           </Card>
         </div>
 
-        <div className="bg-white rounded-[40px] shadow-sm border border-zinc-100 overflow-hidden">
-          <div className="p-8 border-b border-zinc-100">
-            <h2 className="text-2xl font-black text-zinc-900">Recent Reports</h2>
+        <div className="bg-white rounded-[32px] md:rounded-[40px] shadow-sm border border-zinc-100 overflow-hidden">
+          <div className="p-6 md:p-8 border-b border-zinc-100">
+            <h2 className="text-xl md:text-2xl font-black text-zinc-900">Recent Reports</h2>
           </div>
           <div className="divide-y divide-zinc-100">
             {reports.map((report, i) => (
-              <div key={i} className="p-8 flex items-center justify-between hover:bg-zinc-50 transition-colors">
+              <div key={i} className="p-6 md:p-8 flex flex-col sm:flex-row sm:items-center justify-between hover:bg-zinc-50 transition-colors gap-4">
                 <div>
                   <h4 className="text-lg font-bold text-zinc-900 mb-1">{report.title}</h4>
                   <p className="text-sm text-zinc-400 font-medium">{report.date}</p>
                 </div>
-                <div className="flex items-center gap-6">
-                  <span className={`text-xs font-black uppercase tracking-widest px-3 py-1 rounded-full ${
+                <div className="flex items-center justify-between sm:justify-end gap-6">
+                  <span className={`text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full ${
                     report.status === 'Ready' ? 'bg-green-50 text-green-700' : 'bg-amber-50 text-amber-700'
                   }`}>
                     {report.status}
                   </span>
-                  <Button variant="ghost" className="rounded-xl font-bold text-indigo-600 hover:text-indigo-700 hover:bg-indigo-50">
+                  <Button variant="ghost" className="rounded-xl font-bold text-indigo-600 hover:text-indigo-700 hover:bg-indigo-50 px-4">
                     View
                   </Button>
                 </div>

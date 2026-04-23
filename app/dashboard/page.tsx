@@ -29,23 +29,23 @@ export default async function DashboardPage() {
   return (
     <div className="min-h-screen bg-[#fafafa]">
       <Navbar />
-      <main className="max-w-7xl mx-auto px-4 py-16">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-12">
-          <div>
+      <main className="max-w-7xl mx-auto px-4 py-8 md:py-16">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-12">
+          <div className="w-full md:w-auto">
             <div className="flex items-center gap-2 mb-2">
               <span className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
               <span className="text-xs font-bold text-zinc-400 uppercase tracking-widest">Live Profile</span>
             </div>
-            <h1 className="text-5xl font-black tracking-tight text-zinc-900">Welcome back, {user.name.split(' ')[0]}</h1>
+            <h1 className="text-4xl md:text-5xl font-black tracking-tight text-zinc-900 break-words">Welcome back, {user.name.split(' ')[0]}</h1>
           </div>
-          <div className="flex items-center gap-4">
-            <Link href={`/profile/${user.name.toLowerCase().replace(/\s+/g, '-')}`}>
-              <Button variant="outline" className="rounded-2xl border-2 font-bold h-12 px-6 bg-white gap-2">
+          <div className="flex flex-wrap items-center gap-3 w-full md:w-auto">
+            <Link href={`/profile/${user.name.toLowerCase().replace(/\s+/g, '-')}`} className="flex-1 md:flex-none">
+              <Button variant="outline" className="w-full rounded-2xl border-2 font-bold h-12 px-6 bg-white gap-2">
                 <User className="h-4 w-4" /> Profile
               </Button>
             </Link>
-            <Link href="/request/create">
-              <Button className="bg-indigo-600 text-white hover:bg-indigo-700 rounded-2xl px-8 h-12 font-bold shadow-lg shadow-indigo-100 transition-all hover:-translate-y-1">
+            <Link href="/request/create" className="flex-1 md:flex-none">
+              <Button className="w-full bg-indigo-600 text-white hover:bg-indigo-700 rounded-2xl px-8 h-12 font-bold shadow-lg shadow-indigo-100 transition-all hover:-translate-y-1">
                 New Request
               </Button>
             </Link>
@@ -53,10 +53,10 @@ export default async function DashboardPage() {
         </div>
 
         {/* Premium Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 mb-16">
           <Card className="border-none shadow-sm bg-white rounded-[32px] overflow-hidden group">
             <div className="h-2 bg-indigo-500" />
-            <CardContent className="p-8">
+            <CardContent className="p-6 md:p-8">
               <div className="flex justify-between items-start mb-6">
                 <div className="p-3 bg-indigo-50 rounded-2xl">
                   <Star className="h-6 w-6 text-indigo-600 fill-indigo-600" />
@@ -64,7 +64,7 @@ export default async function DashboardPage() {
                 <Badge className="bg-indigo-50 text-indigo-700 border-none font-bold">+12%</Badge>
               </div>
               <p className="text-sm font-bold text-zinc-400 uppercase tracking-widest mb-1">Trust Score</p>
-              <div className="text-4xl font-black text-zinc-900">{user.trustScore}</div>
+              <div className="text-3xl md:text-4xl font-black text-zinc-900">{user.trustScore}</div>
               <p className="text-xs text-zinc-400 mt-4 font-medium flex items-center gap-1">
                 <TrendingUp className="h-3 w-3" /> Top 5% of contributors
               </p>
@@ -73,7 +73,7 @@ export default async function DashboardPage() {
 
           <Card className="border-none shadow-sm bg-white rounded-[32px] overflow-hidden group">
             <div className="h-2 bg-zinc-900" />
-            <CardContent className="p-8">
+            <CardContent className="p-6 md:p-8">
               <div className="flex justify-between items-start mb-6">
                 <div className="p-3 bg-zinc-100 rounded-2xl">
                   <MessageSquare className="h-6 w-6 text-zinc-900" />
@@ -81,32 +81,32 @@ export default async function DashboardPage() {
                 <Badge className="bg-zinc-100 text-zinc-600 border-none font-bold">Active</Badge>
               </div>
               <p className="text-sm font-bold text-zinc-400 uppercase tracking-widest mb-1">My Requests</p>
-              <div className="text-4xl font-black text-zinc-900">{user.requests.length}</div>
+              <div className="text-3xl md:text-4xl font-black text-zinc-900">{user.requests.length}</div>
               <p className="text-xs text-zinc-400 mt-4 font-medium">Managing current help needs</p>
             </CardContent>
           </Card>
 
-          <Card className="border-none shadow-sm bg-zinc-900 text-white rounded-[32px] overflow-hidden relative">
+          <Card className="border-none shadow-sm bg-zinc-900 text-white rounded-[32px] overflow-hidden relative sm:col-span-2 md:col-span-1">
             <div className="absolute top-0 right-0 p-8 opacity-10">
-              <ShieldCheck className="h-24 w-24" />
+              <ShieldCheck className="h-20 w-20 md:h-24 md:w-24" />
             </div>
-            <CardContent className="p-8 relative z-10">
+            <CardContent className="p-6 md:p-8 relative z-10">
               <div className="flex justify-between items-start mb-6">
                 <div className="p-3 bg-white/10 rounded-2xl">
                   <Handshake className="h-6 w-6 text-white" />
                 </div>
               </div>
               <p className="text-sm font-bold text-zinc-400 uppercase tracking-widest mb-1">Contributions</p>
-              <div className="text-4xl font-black text-white">{user.offers.length}</div>
+              <div className="text-3xl md:text-4xl font-black text-white">{user.offers.length}</div>
               <p className="text-xs text-zinc-400 mt-4 font-medium">Verified help offers sent</p>
             </CardContent>
           </Card>
         </div>
 
-        <Tabs defaultValue="requests" className="space-y-12">
-          <TabsList className="bg-zinc-100 p-1.5 rounded-[20px] w-fit border border-zinc-200 shadow-inner">
-            <TabsTrigger value="requests" className="rounded-[14px] px-8 py-2.5 font-bold data-[state=active]:bg-white data-[state=active]:text-zinc-900 data-[state=active]:shadow-md transition-all">My Requests</TabsTrigger>
-            <TabsTrigger value="offers" className="rounded-[14px] px-8 py-2.5 font-bold data-[state=active]:bg-white data-[state=active]:text-zinc-900 data-[state=active]:shadow-md transition-all">My Offers</TabsTrigger>
+        <Tabs defaultValue="requests" className="space-y-8 md:space-y-12">
+          <TabsList className="bg-zinc-100 p-1.5 rounded-[20px] w-full sm:w-fit border border-zinc-200 shadow-inner overflow-x-auto">
+            <TabsTrigger value="requests" className="flex-1 sm:flex-none rounded-[14px] px-6 md:px-8 py-2.5 font-bold data-[state=active]:bg-white data-[state=active]:text-zinc-900 data-[state=active]:shadow-md transition-all">My Requests</TabsTrigger>
+            <TabsTrigger value="offers" className="flex-1 sm:flex-none rounded-[14px] px-6 md:px-8 py-2.5 font-bold data-[state=active]:bg-white data-[state=active]:text-zinc-900 data-[state=active]:shadow-md transition-all">My Offers</TabsTrigger>
           </TabsList>
 
           <TabsContent value="requests" className="space-y-6">

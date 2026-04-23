@@ -111,17 +111,17 @@ export default function CreateRequestPage() {
   return (
     <div className="min-h-screen bg-[#fafafa]">
       <Navbar />
-      <main className="max-w-5xl mx-auto px-4 py-16">
-        <Link href="/explore" className="inline-flex items-center gap-2 text-zinc-400 hover:text-zinc-900 font-bold text-sm uppercase tracking-widest mb-12 transition-all group">
+      <main className="max-w-5xl mx-auto px-4 py-8 md:py-16">
+        <Link href="/explore" className="inline-flex items-center gap-2 text-zinc-400 hover:text-zinc-900 font-bold text-xs md:text-sm uppercase tracking-widest mb-8 md:mb-12 transition-all group">
           <ChevronLeft className="h-4 w-4 group-hover:-translate-x-1 transition-transform" />
           Back to Live Feed
         </Link>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-12">
           <div className="lg:col-span-2">
-            <div className="mb-12">
-              <h1 className="text-5xl font-black tracking-tight text-zinc-900 mb-4">Request Expert Help</h1>
-              <p className="text-zinc-500 text-lg font-medium leading-relaxed">
+            <div className="mb-8 md:mb-12">
+              <h1 className="text-3xl md:text-5xl font-black tracking-tight text-zinc-900 mb-4">Request Expert Help</h1>
+              <p className="text-zinc-500 text-base md:text-lg font-medium leading-relaxed">
                 Describe your challenge in detail. Our AI will analyze your request and pair you with the best available expert.
               </p>
             </div>
