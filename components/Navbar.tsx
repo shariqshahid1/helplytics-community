@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { UserButton, useUser, SignInButton, SignUpButton } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
-import { Sparkles, MessageSquare, LayoutDashboard, Globe, Trophy, Bell } from "lucide-react";
+import { Sparkles, MessageSquare, LayoutDashboard, Globe, Trophy, Bell, BarChart3 } from "lucide-react";
 
 export default function Navbar() {
   const { isSignedIn } = useUser();
@@ -14,6 +14,7 @@ export default function Navbar() {
     { href: "/explore", label: "Explore", icon: Globe },
     { href: "/leaderboard", label: "Leaderboard", icon: Trophy },
     { href: "/ai-center", label: "AI Center", icon: Sparkles, color: "text-indigo-500" },
+    { href: "/reports", label: "Reports", icon: BarChart3 },
   ];
 
   return (
@@ -65,27 +66,15 @@ export default function Navbar() {
                   Dashboard
                 </Link>
                 <Link 
-                  href="/messages" 
+                  href="/settings" 
                   className={`text-sm font-bold px-4 py-2 rounded-xl transition-all flex items-center gap-2 ${
-                    pathname === "/messages" 
+                    pathname === "/settings" 
                     ? "bg-indigo-50 text-indigo-700 shadow-sm shadow-indigo-100" 
                     : "text-zinc-500 hover:text-indigo-600 hover:bg-zinc-50"
                   }`}
                 >
-                  <MessageSquare className="h-4 w-4" />
-                  Messages
-                </Link>
-                <Link 
-                  href="/notifications" 
-                  className={`relative p-2 rounded-xl transition-all ${
-                    pathname === "/notifications" 
-                    ? "bg-indigo-50 text-indigo-700 shadow-sm shadow-indigo-100" 
-                    : "text-zinc-500 hover:text-indigo-600 hover:bg-zinc-50"
-                  }`}
-                >
-                  <Bell className="h-5 w-5" />
-                  <span className="absolute top-1 right-1 h-2 w-2 bg-indigo-600 rounded-full animate-ping" />
-                  <span className="absolute top-1 right-1 h-2 w-2 bg-indigo-600 rounded-full" />
+                  <Bell className="h-4 w-4" />
+                  Settings
                 </Link>
               </>
             )}

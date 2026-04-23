@@ -19,7 +19,7 @@ export async function getUserDashboard() {
         title: "Fix my plumbing",
         description: "Kitchen sink is leaking.",
         category: "Home Repair",
-        status: "OPEN",
+        status: "open",
         createdAt: new Date(),
         _count: { offers: 2 }
       }
@@ -27,9 +27,12 @@ export async function getUserDashboard() {
     offers: [
       {
         id: "mock_off_1",
-        status: "PENDING",
+        status: "pending",
+        createdAt: new Date(),
+        message: "I have experience with React and can help you debug the hydration issues.",
         request: {
-          title: "Help with React"
+          id: "mock_req_2",
+          title: "Help with React Hydration"
         }
       }
     ]
