@@ -1,5 +1,5 @@
 import Navbar from "@/components/Navbar";
-import { getNotifications, markAsRead } from "@/lib/actions/notification.actions";
+import { getNotifications } from "@/lib/actions/notification.actions";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";

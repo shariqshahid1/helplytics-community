@@ -36,10 +36,10 @@ export default async function DashboardPage() {
               <span className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
               <span className="text-xs font-bold text-zinc-400 uppercase tracking-widest">Live Profile</span>
             </div>
-            <h1 className="text-4xl md:text-5xl font-black tracking-tight text-zinc-900 break-words">Welcome back, {user.name.split(' ')[0]}</h1>
+            <h1 className="text-4xl md:text-5xl font-black tracking-tight text-zinc-900 break-words">Welcome back, {user.name?.split(' ')[0] || 'there'}</h1>
           </div>
           <div className="flex flex-wrap items-center gap-3 w-full md:w-auto">
-            <Link href={`/profile/${user.name.toLowerCase().replace(/\s+/g, '-')}`} className="flex-1 md:flex-none">
+            <Link href={`/profile/${encodeURIComponent((user.name || 'user').toLowerCase().replace(/\s+/g, '-'))}`} className="flex-1 md:flex-none">
               <Button variant="outline" className="w-full rounded-2xl border-2 font-bold h-12 px-6 bg-white gap-2">
                 <User className="h-4 w-4" /> Profile
               </Button>
